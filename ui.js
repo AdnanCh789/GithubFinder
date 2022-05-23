@@ -32,4 +32,57 @@
 
     }
 
+    // show repos
+    showRepos(repos) {
+        let output = '';
+        repos.forEach(repo => {
+            output += `
+
+            <div class="card card-body mb-2">
+                <div class="row">
+                    <div class="col-md-6">
+                    <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                    </div>
+                    <div class="col-md-9">
+                    <span class="bg-primary"> Stars: ${repo.stargazers_count}</span>
+                    <span class="bg-secondary"> Watchers: ${repo.watchers_count}</span>
+                    <span class="bg-success"> Forks: ${repo.forks_count}</span>
+                    </div>
+                </div>
+            </div> `;
+        });
+
+        document.getElementById('repos').innerHTML = output;
+
+
+
+    }
+
+    showAlert(message, className) {
+        this.clearAlert();
+        const div = document.createElement('div');
+        div.className = className;
+        div.appendChild(document.createTextNode(message));
+        const container = document.querySelector('.searchContainer');
+        const search = document.querySelector('.search');
+        container.insertBefore(div, search); 
+        setTimeout(() => {
+            this.clearAlert();  
+            
+        }, 3000);
+
+    }
+
+    clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+        if(currentAlert) {
+            currentAlert.remove();
+
+        }
+    }
+
+    clearProfile() {
+        this.profile.innerHTML = '';
+    }
+
  }
